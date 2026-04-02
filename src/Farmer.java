@@ -1,38 +1,44 @@
-public class Farmer {//VARIABLE DECLARATION SECTION
-    //Here's where you state which variables you are going to use.
-    public String name;                //holds the name of the hero
-    public int xpos;                //the x position
-    public int ypos;                //the y position
-    public int dx;                    //the speed of the hero in the x direction
-    public int dy;                    //the speed of the hero in the y direction
-    public int width;
-    public int height;
-    public boolean isAlive;            //a boolean to denote if the hero is alive or dead.
+public class Farmer {
+
+    //========== VARIABLE DECLARATION ==========
+    public int xpos;        // X position on screen
+    public int ypos;        // Y position on screen
+    public int dx;          // Speed in X direction (horizontal)
+    public int dy;          // Speed in Y direction (vertical)
+    public int width;       // Width of farmer image
+    public int height;      // Height of farmer image
+    public boolean isHappy; // Whether farmer is happy
 
 
-    // METHOD DEFINITION SECTION
-
-    // Constructor Definition
-    // A constructor builds the object when called and sets variable values.
-
-
-    //This is a SECOND constructor that takes 3 parameters.  This allows us to specify the hero's name and position when we build it.
-    // if you put in a String, an int and an int the program will use this constructor instead of the one above.
+    //========== CONSTRUCTOR ==========
+    // Builds a Farmer object with starting position
     public Farmer(int pXpos, int pYpos) {
         xpos = pXpos;
         ypos = pYpos;
-        dx =1;
-        dy =0;
-        width = 60;
-        height = 60;
-        isAlive = true;
+        dx = 2;           // Farmer walks slowly to the right
+        dy = 0;           // No vertical movement
+        width = 80;       // Farmer is 80 pixels wide
+        height = 100;     // Farmer is 100 pixels tall
+        isHappy = true;   // Farmer starts happy
+    }
 
-    } // constructor
 
-    //The move method.  Everytime this is run (or "called") the hero's x position and y position change by dx and dy
+    //========== MOVE METHOD (WITH WRAPPING) ==========
+    // Moves the farmer and wraps him around the screen edges
     public void move() {
+        // Update position based on speed
         xpos = xpos + dx;
         ypos = ypos + dy;
 
+        // WRAPPING LOGIC - if farmer goes off right edge, wrap to left
+        if (xpos > 200) {  // Only moves in a small area on left side
+            xpos = -width;  // Start from left edge (off screen)
+        }
+
+        // If farmer goes off left edge, wrap to right
+        if (xpos < -width) {
+            xpos = 200;
+        }
     }
+
 }
