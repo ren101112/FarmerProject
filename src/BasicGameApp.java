@@ -79,11 +79,11 @@ public class BasicGameApp implements Runnable, KeyListener,MouseListener {
         //variable and objects
         //create (construct) the objects needed for the game and load up
         farmerPic = Toolkit.getDefaultToolkit().getImage("farmer image.jpeg");
-        wagonPic = Toolkit.getDefaultToolkit().getImage("wagon.png");
-        applePic = Toolkit.getDefaultToolkit().getImage("apple.png");
+        wagonPic = Toolkit.getDefaultToolkit().getImage("wagon.jpg");
+        applePic = Toolkit.getDefaultToolkit().getImage("apple.jpg");
         orangePic = Toolkit.getDefaultToolkit().getImage("orange.png");
         bananaPic = Toolkit.getDefaultToolkit().getImage("banana.png");
-        backgroundPic = Toolkit.getDefaultToolkit().getImage("farm_background.png");
+        backgroundPic = Toolkit.getDefaultToolkit().getImage("FARMER BACKGROUND.jpg");
 
 
         // Create the farmer (decorative character on the left side)
@@ -256,6 +256,8 @@ public class BasicGameApp implements Runnable, KeyListener,MouseListener {
         g.setColor(Color.DARK_GRAY);
         g.setFont(new Font("Arial", Font.PLAIN, 14));
         g.drawString("Arrow Keys: Move Wagon | Mouse Click: Speed Boost", 20, HEIGHT - 10);
+        g.dispose();
+        bufferStrategy.show();
     }
 
     @Override
