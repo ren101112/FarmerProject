@@ -19,7 +19,7 @@ public class Wagon {
         dy = 0;              // No vertical movement
         width = 100;         // Wagon is 100 pixels wide
         height = 60;         // Wagon is 60 pixels tall
-        fruitsCaught = 0;    // No fruits caught yet
+        fruitsCaught = 0;
     }
 
 

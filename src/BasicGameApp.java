@@ -207,7 +207,7 @@ public class BasicGameApp implements Runnable, KeyListener,MouseListener {
         Graphics2D g = (Graphics2D) bufferStrategy.getDrawGraphics();
 
         // Clear screen with sky blue background
-        g.setColor(new Color(135, 206, 235));
+        g.setColor(new Color(36, 223, 255));
         g.fillRect(0, 0, WIDTH, HEIGHT);
 
         // Draw ground (green grass)

@@ -62,6 +62,7 @@ public class Fruit {
 
         // Start above the screen
         ypos = -100;
+        //remember to make new class
 
         // Fruit is falling again
         isFalling = true;
