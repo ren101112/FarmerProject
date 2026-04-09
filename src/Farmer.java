@@ -17,8 +17,8 @@ public class Farmer {
         ypos = pYpos;
         dx = 2;           // Farmer walks slowly to the right
         dy = 0;           // No vertical movement
-        width = 80;       // Farmer is 80 pixels wide
-        height = 100;     // Farmer is 100 pixels tall
+        width = 100;       // Farmer is 80 pixels wide
+        height = 150;     // Farmer is 100 pixels tall
         isHappy = true;   // Farmer starts happy
     }
 

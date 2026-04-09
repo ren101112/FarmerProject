@@ -79,7 +79,7 @@ public class BasicGameApp implements Runnable, KeyListener,MouseListener {
         //variable and objects
         //create (construct) the objects needed for the game and load up
         farmerPic = Toolkit.getDefaultToolkit().getImage("farmer image.jpeg");
-        wagonPic = Toolkit.getDefaultToolkit().getImage("wagon.jpg");
+        wagonPic = Toolkit.getDefaultToolkit().getImage("wgon.png");
         applePic = Toolkit.getDefaultToolkit().getImage("apple.jpg");
         orangePic = Toolkit.getDefaultToolkit().getImage("orange.png");
         bananaPic = Toolkit.getDefaultToolkit().getImage("banana.png");
@@ -87,10 +87,10 @@ public class BasicGameApp implements Runnable, KeyListener,MouseListener {
 
 
         // Create the farmer (decorative character on the left side)
-        farmer = new Farmer(50, HEIGHT - 150);
+        farmer = new Farmer(50, 90);
 
         // Create the wagon
-        wagon = new Wagon(WIDTH / 2 - 50, HEIGHT - 120);
+        wagon = new Wagon(90, 500);
 
 
         // Create an array of 6 falling fruits with different types
@@ -114,7 +114,7 @@ public class BasicGameApp implements Runnable, KeyListener,MouseListener {
         canvas.addMouseListener(this);
 
 
-    }// BasicGameApp()
+    }
 
 
 //*******************************************************************************
@@ -290,6 +290,17 @@ public class BasicGameApp implements Runnable, KeyListener,MouseListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
+
+        if (e.getKeyCode()==39){//left
+          wagon.xpos=wagon.xpos-10;
+
+
+        }
+        if (e.getKeyCode()==37){//right
+            wagon.xpos=wagon.xpos+10;
+
+
+        }
 
     }
 
