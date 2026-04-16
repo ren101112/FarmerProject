@@ -101,12 +101,6 @@ public class BasicGameApp implements Runnable, KeyListener,MouseListener {
         fallingFruits[3] = new Fruit(300, -350, "apple");
         fallingFruits[4] = new Fruit(700, -450, "orange");
         fallingFruits[5] = new Fruit(500, -550, "banana");
-        fallingFruits[6] = new Fruit(200, -50, "apple");
-        fallingFruits[7] = new Fruit(400, -150, "orange");
-        fallingFruits[8] = new Fruit(600, -250, "banana");
-        fallingFruits[9] = new Fruit(300, -350, "apple");
-        fallingFruits[10] = new Fruit(700, -450, "orange");
-        fallingFruits[11] = new Fruit(500, -550, "banana");
 
         score = 0;
         gameTime = 0;
@@ -297,22 +291,22 @@ public class BasicGameApp implements Runnable, KeyListener,MouseListener {
     @Override
     public void keyTyped(KeyEvent e) {
 
-        if (e.getKeyCode()==39){//left
-          wagon.xpos=wagon.xpos-10;
 
-
-        }
-        if (e.getKeyCode()==37){//right
-            wagon.xpos=wagon.xpos+10;
-
-
-        }
 
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
+        if (e.getKeyCode()==37){//left
+            wagon.dx=wagon.dx-2;
 
+
+        }
+        if (e.getKeyCode()==39){//right
+            wagon.dx=wagon.dx+2;
+
+
+        }
     }
 
     @Override

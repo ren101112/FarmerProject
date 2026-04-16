@@ -15,7 +15,7 @@ public class Wagon {
     public Wagon(int pXpos, int pYpos) {
         xpos = pXpos;
         ypos = pYpos;
-        dx = 0;              // Starts stationary (player controls it)
+        dx =3 ;              // Starts stationary (player controls it)
         dy = 0;              // No vertical movement
         width = 100;         // Wagon is 100 pixels wide
         height = 60;         // Wagon is 60 pixels tall
