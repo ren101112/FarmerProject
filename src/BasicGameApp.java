@@ -101,6 +101,12 @@ public class BasicGameApp implements Runnable, KeyListener,MouseListener {
         fallingFruits[3] = new Fruit(300, -350, "apple");
         fallingFruits[4] = new Fruit(700, -450, "orange");
         fallingFruits[5] = new Fruit(500, -550, "banana");
+        fallingFruits[6] = new Fruit(200, -50, "apple");
+        fallingFruits[7] = new Fruit(400, -150, "orange");
+        fallingFruits[8] = new Fruit(600, -250, "banana");
+        fallingFruits[9] = new Fruit(300, -350, "apple");
+        fallingFruits[10] = new Fruit(700, -450, "orange");
+        fallingFruits[11] = new Fruit(500, -550, "banana");
 
         score = 0;
         gameTime = 0;
