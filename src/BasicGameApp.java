@@ -163,7 +163,7 @@ public class BasicGameApp implements Runnable, KeyListener,MouseListener {
                     fallingFruits[i].width,
                     fallingFruits[i].height
             );
-            if (speedBoostActive) {
+            if (speedBoostActive) {//this if statement allows us to activate the speedboost and make the fruits go twice as fast
                 fallingFruits[i].ypos += fallingFruits[i].dy * 2;
             } else {
                 fallingFruits[i].move();
@@ -171,15 +171,16 @@ public class BasicGameApp implements Runnable, KeyListener,MouseListener {
 
 
             // If fruit falls off bottom of screen, reset it to top
-            if (fallingFruits[i].ypos > HEIGHT) {
+            if (fallingFruits[i].ypos > HEIGHT) {//
                 fallingFruits[i].resetToTop();
             }
 
-            if (fruitBox.intersects(wagonBox)) {
-                score++;
-
+            if (fruitBox.intersects(wagonBox)&&gameTime<=60) {
+                score=score+fallingFruits[i].points;
+//ypos
                 // reset fruit
-                fallingFruits[i].resetToTop();
+                fallingFruits[i].resetToTop();//making good use of the reset to top method in the fruit class
+
             }
 
         }
@@ -202,7 +203,9 @@ public class BasicGameApp implements Runnable, KeyListener,MouseListener {
 
 
 
+
     }
+
 
 
     // Checks if any fruit hit the wagon
@@ -269,20 +272,22 @@ public class BasicGameApp implements Runnable, KeyListener,MouseListener {
         g.drawImage(wagonPic, wagon.xpos, wagon.ypos, wagon.width, wagon.height, null);
 
         // Draw all falling fruits from the array
-        for (int i = 0; i < fallingFruits.length; i++) {
-            Fruit fruit = fallingFruits[i];
+        if (gameTime<=60) {
+            for (int i = 0; i < fallingFruits.length; i++) {
+                Fruit fruit = fallingFruits[i];
 
-            // Choose the right image based on fruit type
-            Image currentFruitImage = applePic;
-            if (fruit.fruitType.equals("orange")) {
-                currentFruitImage = orangePic;
-            } else if (fruit.fruitType.equals("banana")) {
-                currentFruitImage = bananaPic;
+                // Choose the right image based on fruit type
+                Image currentFruitImage = applePic;
+                if (fruit.fruitType.equals("orange")) {
+                    currentFruitImage = orangePic;
+                } else if (fruit.fruitType.equals("banana")) {
+                    currentFruitImage = bananaPic;
+                }
+
+                // Draw the fruit
+                g.drawImage(currentFruitImage, fruit.xpos, fruit.ypos,
+                        fruit.width, fruit.height, null);
             }
-
-            // Draw the fruit
-            g.drawImage(currentFruitImage, fruit.xpos, fruit.ypos,
-                    fruit.width, fruit.height, null);
         }
 
         //========== DRAW GAME UI (Score and Time) ==========
@@ -303,8 +308,18 @@ public class BasicGameApp implements Runnable, KeyListener,MouseListener {
         g.setColor(Color.DARK_GRAY);
         g.setFont(new Font("Arial", Font.PLAIN, 14));
         g.drawString("Arrow Keys: Move Wagon | Mouse Click: Speed Boost", 20, HEIGHT - 10);
+
+        if (gameTime>=60){
+            g.setColor(Color.MAGENTA);
+            g.setFont(new Font ("Helvetica", Font.BOLD,40));
+            g.drawString("FINAL SCORE:" +score,200,200);
+
+        }
         g.dispose();
+
         bufferStrategy.show();
+
+
     }
 
     @Override

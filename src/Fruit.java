@@ -4,11 +4,11 @@ public class Fruit {
     //========== VARIABLE DECLARATION ==========
     public int xpos;              // X position on screen
     public int ypos;              // Y position on screen
-    public int dx;                // Speed in X direction (horizontal drift)
-    public int dy;                // Speed in Y direction (falling speed)
+    public int dx;                // Speed in X direction
+    public int dy;                // Speed in Y direction
     public int width;             // Width of fruit image
     public int height;            // Height of fruit image
-    public String fruitType;      // Type of fruit ("apple", "orange", or "banana")
+    public String fruitType;      // Type of fruit
     public int points;            // Points awarded for catching this fruit
     public boolean isFalling;     // Whether fruit is currently falling
 
@@ -23,22 +23,22 @@ public class Fruit {
         isFalling = true;    // Fruit starts falling
 
         // Set size and properties based on fruit type
-        if (fruitType.equals("apple")) {
+        if (fruitType==("apple")) {
             width = 40;
             height = 40;
             dy = 3;          // Apples fall at medium speed
             points = 10;     // Worth 10 points
 
-        } else if (fruitType.equals("orange")) {
+        } else if (fruitType==("orange")) {
             width = 45;
             height = 45;
-            dy = 2;          // Oranges fall slower
+            dy = 4;          // Oranges fall slower
             points = 15;     // Worth more points (harder to catch)
 
-        } else if (fruitType.equals("banana")) {
+        } else if (fruitType==("banana")) {
             width = 50;
             height = 35;
-            dy = 4;          // Bananas fall faster
+            dy = 2;          // Bananas fall faster
             points = 5;      // Worth fewer points (easier to catch)
         }
     }
@@ -61,7 +61,7 @@ public class Fruit {
         xpos = (int)(Math.random() * 900) + 50;  // Between 50 and 950
 
         // Start above the screen
-        ypos = -100;
+        ypos = -60;
         //remember to make new class
 
         // Fruit is falling again
