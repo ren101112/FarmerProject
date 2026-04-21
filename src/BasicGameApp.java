@@ -108,6 +108,9 @@ public class BasicGameApp implements Runnable, KeyListener,MouseListener {
         speedBoostActive = false;
         speedBoostTimer = 0;
 
+
+
+
         //========== ADD LISTENERS ==========
         // Set up keyboard and mouse controls
         canvas.addKeyListener(this);
@@ -147,13 +150,57 @@ public class BasicGameApp implements Runnable, KeyListener,MouseListener {
 
         // Move all the falling fruits in the array
         for (int i = 0; i < fallingFruits.length; i++) {
-            fallingFruits[i].move();
+            Rectangle wagonBox = new Rectangle(
+                    wagon.xpos,
+                    wagon.ypos,
+                    wagon.width,
+                    wagon.height
+            );
+
+            Rectangle fruitBox = new Rectangle(
+                    fallingFruits[i].xpos,
+                    fallingFruits[i].ypos,
+                    fallingFruits[i].width,
+                    fallingFruits[i].height
+            );
+            if (speedBoostActive) {
+                fallingFruits[i].ypos += fallingFruits[i].dy * 2;
+            } else {
+                fallingFruits[i].move();
+            }
+
 
             // If fruit falls off bottom of screen, reset it to top
             if (fallingFruits[i].ypos > HEIGHT) {
                 fallingFruits[i].resetToTop();
             }
+
+            if (fruitBox.intersects(wagonBox)) {
+                score++;
+
+                // reset fruit
+                fallingFruits[i].resetToTop();
+            }
+
         }
+        // Handle speed boost timer
+        if (speedBoostActive==true) {
+            speedBoostTimer--;
+            if (speedBoostTimer <= 0) {
+                speedBoostActive = false;
+            }
+        }
+
+
+
+        frameCount++;
+
+        if (frameCount % 50 == 0) { // ~1 second
+            gameTime++;
+        }
+
+
+
 
     }
 
@@ -247,7 +294,7 @@ public class BasicGameApp implements Runnable, KeyListener,MouseListener {
         g.drawString("Time: " + gameTime + "s", WIDTH - 150, 30);
 
         // Draw speed boost indicator if active
-        if (speedBoostActive) {
+        if (speedBoostActive==true) {
             g.setColor(Color.RED);
             g.drawString("SPEED BOOST!", WIDTH / 2 - 80, 30);
         }
@@ -267,7 +314,8 @@ public class BasicGameApp implements Runnable, KeyListener,MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        // Could use this for different mouse interaction
+        speedBoostActive = true;
+        speedBoostTimer = 100;
     }
 
     // Called when mouse button is released
@@ -297,20 +345,17 @@ public class BasicGameApp implements Runnable, KeyListener,MouseListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode()==37){//left
-            wagon.dx=wagon.dx-2;
-
-
+        if (e.getKeyCode()==37){ // left
+            wagon.dx = -4;
         }
-        if (e.getKeyCode()==39){//right
-            wagon.dx=wagon.dx+2;
-
-
+        if (e.getKeyCode()==39){ // right
+            wagon.dx = 4;
         }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
+        wagon.dx = 0;
 
     }
 }
