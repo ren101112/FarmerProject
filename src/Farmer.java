@@ -16,7 +16,7 @@ public class Farmer {
         xpos = pXpos;
         ypos = pYpos;
         dx = 2;           // Farmer walks slowly to the right
-        dy = 3;           // No vertical movement
+        dy = 0;           // No vertical movement
         width = 100;       // Farmer is 80 pixels wide
         height = 150;     // Farmer is 100 pixels tall
         isHappy = true;   // Farmer starts happy
@@ -31,13 +31,13 @@ public class Farmer {
         ypos = ypos + dy;
 
         // WRAPPING LOGIC - if farmer goes off right edge, wrap to left
-        if (xpos > 200) {  // Only moves in a small area on left side
+        if (xpos > 1000) {  // Only moves in a small area on left side
             xpos = -width;  // Start from left edge (off screen)
         }
 
         // If farmer goes off left edge, wrap to right
         if (xpos < -width) {
-            xpos = 200;
+            xpos = 1000;
         }
     }
 
