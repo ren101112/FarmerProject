@@ -1,13 +1,13 @@
 public class Wagon {
 
     //========== VARIABLE DECLARATION ==========
-    public int xpos;           // X position on screen
-    public int ypos;           // Y position on screen
-    public int dx;             // Speed in X direction (controlled by keyboard)
-    public int dy;             // Speed in Y direction (stays on ground)
-    public int width;          // Width of wagon image
-    public int height;         // Height of wagon image
-    public int fruitsCaught;   // Number of fruits this wagon has caught
+    public int xpos;// X position on screen
+    public int ypos;// Y position on screen
+    public int dx;// Speed in X direction (controlled by keyboard)
+    public int dy;// Speed in Y direction (stays on ground)
+    public int width; // Width of wagon image
+    public int height;// Height of wagon image
+    public int fruitsCaught;// Number of fruits this wagon has caught
 
 
     //========== CONSTRUCTOR ==========

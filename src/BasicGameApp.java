@@ -57,7 +57,8 @@ public class BasicGameApp implements Runnable, KeyListener,MouseListener {
     private int gameTime;  // Game time in seconds
     private int frameCount;  // Count frames to track seconds
     private boolean speedBoostActive;  // Whether time is sped up from mouse click
-    private int speedBoostTimer;  // How long the speed boost lasts
+    private int speedBoostTimer;
+    // How long the speed boost lasts
 
 
     // Main method definition
@@ -75,6 +76,7 @@ public class BasicGameApp implements Runnable, KeyListener,MouseListener {
     public BasicGameApp() {
 
         setUpGraphics();
+
 
         //variable and objects
         //create (construct) the objects needed for the game and load up
@@ -107,6 +109,7 @@ public class BasicGameApp implements Runnable, KeyListener,MouseListener {
         frameCount = 0;
         speedBoostActive = false;
         speedBoostTimer = 0;
+        interaction();
 
 
 
@@ -164,7 +167,7 @@ public class BasicGameApp implements Runnable, KeyListener,MouseListener {
                     fallingFruits[i].height
             );
             if (speedBoostActive) {//this if statement allows us to activate the speedboost and make the fruits go twice as fast
-                fallingFruits[i].ypos += fallingFruits[i].dy * 2;
+                fallingFruits[i].ypos = fallingFruits[i].dy * 2;
             } else {
                 fallingFruits[i].move();
             }
@@ -175,13 +178,14 @@ public class BasicGameApp implements Runnable, KeyListener,MouseListener {
                 fallingFruits[i].resetToTop();
             }
 
-            if (fruitBox.intersects(wagonBox)&&gameTime<=60) {
+            if (fruitBox.intersects(wagonBox)&&gameTime<=60){
                 score=score+fallingFruits[i].points;
 //ypos
                 // reset fruit
                 fallingFruits[i].resetToTop();//making good use of the reset to top method in the fruit class
 
             }
+
 
         }
         // Handle speed boost timer
@@ -194,11 +198,39 @@ public class BasicGameApp implements Runnable, KeyListener,MouseListener {
 
 
 
+
         frameCount++;
 
         if (frameCount % 50 == 0) { // ~1 second
             gameTime++;
         }
+
+
+
+    }
+    public void interaction(){
+        Rectangle farmerbox = new Rectangle(
+                farmer.xpos,
+                farmer.ypos,
+                farmer.width,
+                farmer.height
+        );
+
+        Rectangle wagonBox = new Rectangle(
+                wagon.xpos,
+                wagon.ypos,
+                wagon.width,
+                wagon.height
+        );
+
+        if(farmerbox.intersects(wagonBox)){
+            wagon.dx=0;
+
+        }
+
+
+
+
 
 
 

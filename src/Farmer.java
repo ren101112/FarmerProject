@@ -7,7 +7,7 @@ public class Farmer {
     public int dy;          // Speed in Y direction (vertical)
     public int width;       // Width of farmer image
     public int height;      // Height of farmer image
-    public boolean isHappy; // Whether farmer is happy
+
 
 
     //========== CONSTRUCTOR ==========
@@ -19,7 +19,7 @@ public class Farmer {
         dy = 0;           // No vertical movement
         width = 100;       // Farmer is 80 pixels wide
         height = 150;     // Farmer is 100 pixels tall
-        isHappy = true;   // Farmer starts happy
+
     }
 
 

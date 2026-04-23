@@ -13,13 +13,13 @@ public class Fruit {
     public boolean isFalling;     // Whether fruit is currently falling
 
 
-    //========== CONSTRUCTOR ==========
+    //CONSTRUCTOR
     // Builds a Fruit object with starting position and type
     public Fruit(int pXpos, int pYpos, String pFruitType) {
         xpos = pXpos;
         ypos = pYpos;
         fruitType = pFruitType;
-        dx = 0;              // No horizontal movement (falls straight down)
+        dx = 0;              // No horizontal movement
         isFalling = true;    // Fruit starts falling
 
         // Set size and properties based on fruit type
