@@ -58,6 +58,8 @@ public class BasicGameApp implements Runnable, KeyListener,MouseListener {
     private int frameCount;  // Count frames to track seconds
     private boolean speedBoostActive;  // Whether time is sped up from mouse click
     private int speedBoostTimer;
+    private boolean wagonDisabled;
+    private int wagonDisableTimer;
     // How long the speed boost lasts
 
 
@@ -167,7 +169,7 @@ public class BasicGameApp implements Runnable, KeyListener,MouseListener {
                     fallingFruits[i].height
             );
             if (speedBoostActive) {//this if statement allows us to activate the speedboost and make the fruits go twice as fast
-                fallingFruits[i].ypos = fallingFruits[i].dy * 2;
+                fallingFruits[i].ypos += fallingFruits[i].dy * 2;
             } else {
                 fallingFruits[i].move();
             }
@@ -204,12 +206,7 @@ public class BasicGameApp implements Runnable, KeyListener,MouseListener {
         if (frameCount % 50 == 0) { // ~1 second
             gameTime++;
         }
-
-
-
-    }
-    public void interaction(){
-        Rectangle farmerbox = new Rectangle(
+        Rectangle farmerBox = new Rectangle(
                 farmer.xpos,
                 farmer.ypos,
                 farmer.width,
@@ -223,11 +220,29 @@ public class BasicGameApp implements Runnable, KeyListener,MouseListener {
                 wagon.height
         );
 
-        if(farmerbox.intersects(wagonBox)){
-            wagon.dx=0;
+        if (farmerBox.intersects(wagonBox) && wagonDisabled==false) {
 
+            // Bounce farmer off wagon
+            farmer.dx = -farmer.dx;
+            farmer.dy = -farmer.dy;
+
+            // Disable wagon
+            wagonDisabled = true;
+            wagonDisableTimer = 500; // ~10 seconds (since pause is 20ms)
+        }
+        if (wagonDisabled==true) {
+            wagonDisableTimer--;
+
+            if (wagonDisableTimer <= 0) {
+                wagonDisabled = false;
+            }
         }
 
+
+
+
+    }
+    public void interaction(){
 
 
 
@@ -347,6 +362,10 @@ public class BasicGameApp implements Runnable, KeyListener,MouseListener {
             g.drawString("FINAL SCORE:" +score,200,200);
 
         }
+        if (wagonDisabled) {
+            g.setColor(Color.RED);
+            g.drawString("WAGON STUNNED!", WIDTH / 2 - 100, 60);
+        }
         g.dispose();
 
         bufferStrategy.show();
@@ -392,13 +411,16 @@ public class BasicGameApp implements Runnable, KeyListener,MouseListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode()==37){ // left
-            wagon.dx = -4;
+        if (wagonDisabled==false) {
+            if (e.getKeyCode() == 37) {
+                wagon.dx = -4;
+            }
+            if (e.getKeyCode() == 39) {
+                wagon.dx = 4;
+            }
         }
-        if (e.getKeyCode()==39){ // right
-            wagon.dx = 4;
         }
-    }
+
 
     @Override
     public void keyReleased(KeyEvent e) {
