@@ -29,12 +29,12 @@ public class Fruit {
             dy = 3;          // Apples fall at medium speed
             points = 10;     // Worth 10 points
 
-        } else if (fruitType==("orange")) {
+        } else if (fruitType==("orange")) {//this sets the points for each fruit type and it also
             width = 45;
             height = 45;
             dy = 4;          // Oranges fall slower
             points = 15;     // Worth more points (harder to catch)
-
+//
         } else if (fruitType==("banana")) {
             width = 50;
             height = 35;

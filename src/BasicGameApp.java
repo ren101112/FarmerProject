@@ -90,7 +90,7 @@ public class BasicGameApp implements Runnable, KeyListener,MouseListener {
         backgroundPic = Toolkit.getDefaultToolkit().getImage("FARMER BACKGROUND.jpg");
 
 
-        // Create the farmer (decorative character on the left side)
+        // Create the farmer (decorative character
         farmer = new Farmer(50, 90);
 
         // Create the wagon
@@ -106,7 +106,7 @@ public class BasicGameApp implements Runnable, KeyListener,MouseListener {
         fallingFruits[4] = new Fruit(700, -450, "orange");
         fallingFruits[5] = new Fruit(500, -550, "banana");
 
-        score = 0;
+        score = 0;//set all the things to false
         gameTime = 0;
         frameCount = 0;
         speedBoostActive = false;
@@ -116,7 +116,6 @@ public class BasicGameApp implements Runnable, KeyListener,MouseListener {
 
 
 
-        //========== ADD LISTENERS ==========
         // Set up keyboard and mouse controls
         canvas.addKeyListener(this);
         canvas.addMouseListener(this);
@@ -125,12 +124,7 @@ public class BasicGameApp implements Runnable, KeyListener,MouseListener {
     }
 
 
-//*******************************************************************************
-//User Method Section
-//
-// put your code to do things here.
 
-    // main thread
     // this is the code that plays the game after you set things up
     public void run() {
 
@@ -147,7 +141,7 @@ public class BasicGameApp implements Runnable, KeyListener,MouseListener {
     public void moveThings() {
         //calls the move( ) code in the objects
 
-        // Move the farmer (he walks back and forth with wrapping)
+        // Move the farmer around bouncing off the walls
         farmer.move();
 
         // Move the wagon (controlled by player, bounces at edges)
@@ -155,21 +149,21 @@ public class BasicGameApp implements Runnable, KeyListener,MouseListener {
 
         // Move all the falling fruits in the array
         for (int i = 0; i < fallingFruits.length; i++) {
-            Rectangle wagonBox = new Rectangle(
+            Rectangle wagonBox = new Rectangle(//i established a hitbox for the wagon so it can catch the fruits
                     wagon.xpos,
                     wagon.ypos,
                     wagon.width,
                     wagon.height
             );
 
-            Rectangle fruitBox = new Rectangle(
+            Rectangle fruitBox = new Rectangle(//hitbox for the fruits too
                     fallingFruits[i].xpos,
                     fallingFruits[i].ypos,
                     fallingFruits[i].width,
                     fallingFruits[i].height
             );
             if (speedBoostActive) {//this if statement allows us to activate the speedboost and make the fruits go twice as fast
-                fallingFruits[i].ypos += fallingFruits[i].dy * 2;
+                fallingFruits[i].ypos+= fallingFruits[i].dy * 2;
             } else {
                 fallingFruits[i].move();
             }
@@ -180,7 +174,7 @@ public class BasicGameApp implements Runnable, KeyListener,MouseListener {
                 fallingFruits[i].resetToTop();
             }
 
-            if (fruitBox.intersects(wagonBox)&&gameTime<=60){
+            if (fruitBox.intersects(wagonBox)&&gameTime<=60){//i only want points to count if the game is actualy within time
                 score=score+fallingFruits[i].points;
 //ypos
                 // reset fruit
@@ -201,7 +195,7 @@ public class BasicGameApp implements Runnable, KeyListener,MouseListener {
 
 
 
-        frameCount++;
+        frameCount++;//because this method loops, every 10ms a frame will be counted
 
         if (frameCount % 50 == 0) { // ~1 second
             gameTime++;
@@ -210,7 +204,7 @@ public class BasicGameApp implements Runnable, KeyListener,MouseListener {
                 farmer.xpos,
                 farmer.ypos,
                 farmer.width,
-                farmer.height
+                farmer.height//made hitbox for farmer and wagon again so if they collide it disables the wagon for a while
         );
 
         Rectangle wagonBox = new Rectangle(
@@ -224,7 +218,7 @@ public class BasicGameApp implements Runnable, KeyListener,MouseListener {
 
             // Bounce farmer off wagon
             farmer.dx = -farmer.dx;
-            farmer.dy = -farmer.dy;
+            farmer.dy = -farmer.dy;//they bounce on hit
 
             // Disable wagon
             wagonDisabled = true;
@@ -319,12 +313,12 @@ public class BasicGameApp implements Runnable, KeyListener,MouseListener {
         g.drawImage(wagonPic, wagon.xpos, wagon.ypos, wagon.width, wagon.height, null);
 
         // Draw all falling fruits from the array
-        if (gameTime<=60) {
+        if (gameTime<=60) {//only draw fruits if the game is active
             for (int i = 0; i < fallingFruits.length; i++) {
                 Fruit fruit = fallingFruits[i];
 
                 // Choose the right image based on fruit type
-                Image currentFruitImage = applePic;
+                Image currentFruitImage = applePic;//i did a cool thing here where i took the object of the fruit type and connected it to the current image being displayed
                 if (fruit.fruitType.equals("orange")) {
                     currentFruitImage = orangePic;
                 } else if (fruit.fruitType.equals("banana")) {
@@ -337,7 +331,7 @@ public class BasicGameApp implements Runnable, KeyListener,MouseListener {
             }
         }
 
-        //========== DRAW GAME UI (Score and Time) ==========
+        //DRAW GAME UI (Score and Time
         g.setColor(Color.BLACK);
         g.setFont(new Font("Arial", Font.BOLD, 24));
         g.drawString("Score: " + score, 20, 30);
@@ -354,7 +348,7 @@ public class BasicGameApp implements Runnable, KeyListener,MouseListener {
         // Draw instructions
         g.setColor(Color.DARK_GRAY);
         g.setFont(new Font("Arial", Font.PLAIN, 14));
-        g.drawString("Arrow Keys: Move Wagon | Mouse Click: Speed Boost", 20, HEIGHT - 10);
+        g.drawString("Arrow Keys: Move Wagon \n Mouse Click: Speed Boost", 20, HEIGHT - 10);
 
         if (gameTime>=60){
             g.setColor(Color.MAGENTA);
@@ -411,12 +405,12 @@ public class BasicGameApp implements Runnable, KeyListener,MouseListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (wagonDisabled==false) {
+        if (wagonDisabled==false) {//only happens if the wagon is alive
             if (e.getKeyCode() == 37) {
                 wagon.dx = -4;
             }
             if (e.getKeyCode() == 39) {
-                wagon.dx = 4;
+                wagon.dx = 4;//allows us to move the wagon left and right
             }
         }
         }
