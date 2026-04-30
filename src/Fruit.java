@@ -44,7 +44,7 @@ public class Fruit {
     }
 
 
-    //========== MOVE METHOD ==========
+    //move method
     // Moves the fruit downward (falling)
     public void move() {
         // Update position based on speed
@@ -53,7 +53,7 @@ public class Fruit {
     }
 
 
-    //========== RESET TO TOP METHOD ==========
+    //reset to top method
     // Resets fruit to top of screen at random X position
     // Called when fruit is caught or falls off bottom
     public void resetToTop() {

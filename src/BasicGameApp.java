@@ -163,7 +163,7 @@ public class BasicGameApp implements Runnable, KeyListener,MouseListener {
                     fallingFruits[i].height
             );
             if (speedBoostActive) {//this if statement allows us to activate the speedboost and make the fruits go twice as fast
-                fallingFruits[i].ypos+= fallingFruits[i].dy * 2;
+                fallingFruits[i].ypos= fallingFruits[i].ypos+ fallingFruits[i].dy * 2;
             } else {
                 fallingFruits[i].move();
             }
@@ -176,6 +176,8 @@ public class BasicGameApp implements Runnable, KeyListener,MouseListener {
 
             if (fruitBox.intersects(wagonBox)&&gameTime<=60){//i only want points to count if the game is actualy within time
                 score=score+fallingFruits[i].points;
+
+                //here is the part that actually checks if the fruit are intersecting the wagon
 //ypos
                 // reset fruit
                 fallingFruits[i].resetToTop();//making good use of the reset to top method in the fruit class
@@ -238,7 +240,7 @@ public class BasicGameApp implements Runnable, KeyListener,MouseListener {
     }
     public void interaction(){
 
-
+//i didnt use this because this method doesnt loop so its hard to do constant things
 
 
 
@@ -305,7 +307,7 @@ public class BasicGameApp implements Runnable, KeyListener,MouseListener {
         g.setColor(new Color(34, 139, 34));
         g.fillRect(0, HEIGHT - 100, WIDTH, 100);
 
-        //========== DRAW GAME OBJECTS ==========
+        //----=--- DRAW GAME OBJECTS
         // Draw the farmer
         g.drawImage(farmerPic, farmer.xpos, farmer.ypos, farmer.width, farmer.height, null);
 
@@ -331,7 +333,7 @@ public class BasicGameApp implements Runnable, KeyListener,MouseListener {
             }
         }
 
-        //DRAW GAME UI (Score and Time
+        //draw game UI (Score and Time
         g.setColor(Color.BLACK);
         g.setFont(new Font("Arial", Font.BOLD, 24));
         g.drawString("Score: " + score, 20, 30);
@@ -348,17 +350,17 @@ public class BasicGameApp implements Runnable, KeyListener,MouseListener {
         // Draw instructions
         g.setColor(Color.DARK_GRAY);
         g.setFont(new Font("Arial", Font.PLAIN, 14));
-        g.drawString("Arrow Keys: Move Wagon \n Mouse Click: Speed Boost", 20, HEIGHT - 10);
+        g.drawString("Arrow Keys: Move Wagon \n Mouse Click: Speed Boost", 20, HEIGHT - 10);//creates instructions
 
         if (gameTime>=60){
             g.setColor(Color.MAGENTA);
-            g.setFont(new Font ("Helvetica", Font.BOLD,40));
+            g.setFont(new Font ("Helvetica", Font.BOLD,40));//game over screen
             g.drawString("FINAL SCORE:" +score,200,200);
 
         }
         if (wagonDisabled) {
             g.setColor(Color.RED);
-            g.drawString("WAGON STUNNED!", WIDTH / 2 - 100, 60);
+            g.drawString("WAGON STUNNED!", WIDTH / 2 - 100, 60);//this shows the wagon stunned text if its disabled
         }
         g.dispose();
 

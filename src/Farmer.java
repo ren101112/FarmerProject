@@ -23,7 +23,7 @@ public class Farmer {
     }
 
 
-    //========== MOVE METHOD (WITH WRAPPING) ==========
+    //MOVE METHOD WITH WRAPPING
     // Moves the farmer and wraps him around the screen edges
     public void move() {
         // Update position based on speed
@@ -32,7 +32,7 @@ public class Farmer {
         ypos += dy;
 
         // Bounce off left/right walls
-        if (xpos <= 0 || xpos + width >=1000) {
+        if (xpos <= 0 || xpos + width >=1000) {//i used the or function which is good for doing both at once
             dx = -dx;
         }
 
